@@ -7,11 +7,17 @@
 </head>
 
 <body>
+
+  <div id="hello_world">
+  </div>
+
+
   <script type="module">
     import { Octokit } from "https://cdn.pika.dev/@octokit/rest";
 
     const octokit = new Octokit({
-      auth: "ff054633a97507c2dd79d7cf8f9f3d857ed811e1",
+      // l'autenticazione non serve se il repo è pubblico
+      // auth: "a89c1af678a6f5899b849ec2dbfa1f7a1288e8f4",
     });
 
     /*
@@ -39,7 +45,21 @@
         .then(({ data }) => {
           console.log("getContent:")
           console.log(data)
+          let url = data.download_url
+          scriviSuPagina(url);
         });
+
+
+    function scriviSuPagina(url) {
+      let req = new XMLHttpRequest();
+      req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("hello_world").innerHTML = this.responseText;
+        }
+      };
+      req.open("GET", url, true);
+      req.send();
+    }
 
 
 
