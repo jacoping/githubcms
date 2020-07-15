@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>GITHUB REST API EXPERIMENTS</title>
+</head>
+
+<body>
+  <script type="module">
+    import { Octokit } from "https://cdn.pika.dev/@octokit/rest";
+
+    const octokit = new Octokit({
+      auth: "ff054633a97507c2dd79d7cf8f9f3d857ed811e1",
+    });
+
+    /*
+    octokit.repos.listForOrg({
+        org: "octokit",
+        type: "public",
+      })
+      .then(({ data }) => {
+        console.log("listForOrg:")
+        console.log(data)
+      });
+
+    octokit.repos.listForAuthenticatedUser()
+      .then(({ data }) => {
+        console.log("listForAuthenticatedUser:")
+        console.log(data)
+      });
+    */
+
+      octokit.repos.getContent({
+        owner: "jacoping",
+        repo: "githubcms",
+        path: "content/test.txt",
+      })
+        .then(({ data }) => {
+          console.log("getContent:")
+          console.log(data)
+        });
+
+
+
+</script>
+
+</body>
+
+</html>
+
+
+
+
+
+<!--
+
+https://octokit.github.io/rest.js/v18#repos-get-content
